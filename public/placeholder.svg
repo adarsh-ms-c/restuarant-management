@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="320" viewBox="0 0 480 320">
+  <rect width="480" height="320" fill="#eef2ff"/>
+  <circle cx="240" cy="155" r="78" fill="#c7d2fe"/>
+  <circle cx="240" cy="155" r="58" fill="#ffffff"/>
+  <path d="M196 155a44 44 0 0 0 88 0" fill="none" stroke="#6366f1" stroke-width="10" stroke-linecap="round"/>
+  <rect x="338" y="70" width="12" height="96" rx="6" fill="#6366f1"/>
+  <rect x="130" y="70" width="12" height="96" rx="6" fill="#6366f1"/>
+  <text x="240" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#4338ca">restuarant management</text>
+</svg>
