@@ -29,7 +29,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
           <div
             key={toast.id}
             className={`rounded-xl px-4 py-3 text-sm font-medium text-white shadow-xl ${
-              toast.kind === "ok" ? "bg-emerald-600" : "bg-red-600"
+              toast.kind === "ok" ? "bg-success-600" : "bg-danger-600"
             }`}
           >
             {toast.message}

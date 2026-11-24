@@ -13,7 +13,7 @@ type Props = {
 export default function OrderConfirm({ item, quantity, onCancel, onConfirm }: Props) {
   return (
     <div
-      className="fixed inset-0 z-40 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-40 flex items-center justify-center bg-overlay p-4 backdrop-blur-sm"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) onCancel();
       }}
@@ -22,14 +22,14 @@ export default function OrderConfirm({ item, quantity, onCancel, onConfirm }: Pr
         role="dialog"
         aria-modal="true"
         aria-labelledby="order-confirm-title"
-        className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl"
+        className="w-full max-w-md rounded-2xl bg-white p-6 shadow-panel"
       >
-        <h2 id="order-confirm-title" className="text-lg font-semibold text-slate-900">
+        <h2 id="order-confirm-title" className="text-lg font-semibold text-charcoal">
           Confirm your order
         </h2>
-        <p className="mt-1 text-sm text-slate-500">Please check the details before placing it.</p>
+        <p className="mt-1 text-sm text-muted">Please check the details before placing it.</p>
 
-        <div className="mt-5 flex items-center gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
+        <div className="mt-5 flex items-center gap-4 rounded-xl border border-line bg-paper p-4">
           <img
             src={item.imgUrl || "/placeholder.svg"}
             alt={item.name}
@@ -39,23 +39,23 @@ export default function OrderConfirm({ item, quantity, onCancel, onConfirm }: Pr
             }}
           />
           <div className="min-w-0">
-            <p className="truncate font-semibold text-slate-900">{item.name}</p>
-            <p className="text-sm text-slate-500">{money(item.price)} each</p>
+            <p className="truncate font-semibold text-charcoal">{item.name}</p>
+            <p className="text-sm text-muted">{money(item.price)} each</p>
           </div>
         </div>
 
         <div className="mt-4 space-y-2 text-sm">
-          <div className="flex justify-between text-slate-600">
+          <div className="flex justify-between text-muted">
             <span>Quantity</span>
-            <span className="font-medium text-slate-900">{quantity}</span>
+            <span className="font-medium text-charcoal">{quantity}</span>
           </div>
-          <div className="flex justify-between text-slate-600">
+          <div className="flex justify-between text-muted">
             <span>Available stock</span>
-            <span className="font-medium text-slate-900">{item.stock}</span>
+            <span className="font-medium text-charcoal">{item.stock}</span>
           </div>
-          <div className="flex justify-between border-t border-slate-200 pt-3 text-base font-bold text-slate-900">
+          <div className="flex justify-between border-t border-line pt-3 text-base font-bold text-charcoal">
             <span>Total</span>
-            <span className="text-indigo-600">{money(item.price * quantity)}</span>
+            <span className="text-brick-600">{money(item.price * quantity)}</span>
           </div>
         </div>
 

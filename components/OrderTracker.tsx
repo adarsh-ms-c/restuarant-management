@@ -50,12 +50,12 @@ export default function OrderTracker() {
 
   return (
     <section id="track" className="scroll-mt-24">
-      <h2 className="text-xl font-semibold text-slate-900">Track an order</h2>
-      <p className="mt-1 text-sm text-slate-500">Check the latest status and payment update for any order.</p>
+      <h2 className="text-xl font-semibold text-charcoal">Track an order</h2>
+      <p className="mt-1 text-sm text-muted">Check the latest status and payment update for any order.</p>
       <div className="card mt-4 p-5 sm:p-6">
         {recent.length > 0 && (
           <div className="mb-4 flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold uppercase tracking-wide text-slate-400">Recent</span>
+            <span className="text-xs font-semibold uppercase tracking-wide text-muted">Recent</span>
             {recent.map((id) => (
               <button
                 key={id}
@@ -64,7 +64,7 @@ export default function OrderTracker() {
                   setQuery(String(id));
                   lookup(id);
                 }}
-                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600 hover:border-indigo-300 hover:text-indigo-600"
+                className="rounded-full border border-line bg-paper px-3 py-1 text-xs font-medium text-muted hover:border-brick-200 hover:text-brick-600"
               >
                 #{id}
               </button>
@@ -87,17 +87,17 @@ export default function OrderTracker() {
           />
           <button type="submit" className="btn-primary sm:w-32">Track</button>
         </form>
-        {error && <p className="mt-3 text-sm font-medium text-red-600">{error}</p>}
+        {error && <p className="mt-3 text-sm font-medium text-danger-600">{error}</p>}
         {selected && (
-          <div className="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <div className="mt-5 rounded-xl border border-line bg-paper p-4">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
-                <p className="text-sm font-semibold text-slate-900">Order #{selected.id}</p>
-                <p className="text-sm text-slate-600">
+                <p className="text-sm font-semibold text-charcoal">Order #{selected.id}</p>
+                <p className="text-sm text-muted">
                   {itemName(selected.itemId)} x {selected.quantity}
                 </p>
               </div>
-              <p className="text-lg font-bold text-indigo-600">{money(selected.total)}</p>
+              <p className="text-lg font-bold text-brick-600">{money(selected.total)}</p>
             </div>
             <div className="mt-5 flex flex-wrap items-center gap-2">
               {FLOW.map((step, index) => (
@@ -105,31 +105,31 @@ export default function OrderTracker() {
                   <span
                     className={`badge ${
                       selected.status === "REJECTED" && index === 0
-                        ? "bg-red-100 text-red-700"
+                        ? "bg-danger-100 text-danger-700"
                         : index <= activeIndex
-                          ? "bg-emerald-100 text-emerald-700"
-                          : "bg-slate-200 text-slate-500"
+                          ? "bg-success-100 text-success-700"
+                          : "bg-line text-muted"
                     }`}
                   >
                     {step}
                   </span>
-                  {index < FLOW.length - 1 && <span className="text-slate-300">→</span>}
+                  {index < FLOW.length - 1 && <span className="text-line">→</span>}
                 </div>
               ))}
               {selected.status === "REJECTED" && (
-                <span className="badge bg-red-100 text-red-700">REJECTED</span>
+                <span className="badge bg-danger-100 text-danger-700">REJECTED</span>
               )}
               <span
                 className={`badge ${
                   selected.paymentStatus === "PAID"
-                    ? "bg-emerald-100 text-emerald-700"
-                    : "bg-amber-100 text-amber-700"
+                    ? "bg-success-100 text-success-700"
+                    : "bg-warning-100 text-warning-700"
                 }`}
               >
                 {selected.paymentStatus}
               </span>
             </div>
-            <p className="mt-3 text-xs text-slate-500">
+            <p className="mt-3 text-xs text-muted">
               Stock deducted: {selected.stockDeducted ? "Yes" : "No"}
             </p>
           </div>

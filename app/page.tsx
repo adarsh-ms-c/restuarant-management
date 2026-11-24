@@ -121,10 +121,10 @@ export default function HomePage() {
       />
       <main className="mx-auto max-w-6xl space-y-12 px-4 pb-16 pt-10 sm:px-6">
         <section className="card overflow-hidden">
-          <div className="bg-gradient-to-r from-indigo-600 to-indigo-500 px-6 py-10 text-white sm:px-10">
-            <p className="text-sm font-medium text-indigo-100">Welcome to</p>
-            <h1 className="mt-1 text-3xl font-bold sm:text-4xl">restuarant management</h1>
-            <p className="mt-3 max-w-xl text-sm text-indigo-100">
+          <div className="hero-panel px-6 py-10 text-white sm:px-10">
+            <p className="text-sm font-medium text-cream">Welcome to</p>
+            <h1 className="mt-1 text-3xl font-bold sm:text-4xl">Coffee Time</h1>
+            <p className="mt-3 max-w-xl text-sm text-cream">
               Pick your favourites, choose a quantity, and place an order. Track it any time from this page.
             </p>
           </div>
@@ -133,8 +133,8 @@ export default function HomePage() {
         <section id="menu" className="scroll-mt-24">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <h2 className="text-xl font-semibold text-slate-900">Menu</h2>
-              <p className="mt-1 text-sm text-slate-500">{items.length} items available</p>
+              <h2 className="text-xl font-semibold text-charcoal">Menu</h2>
+              <p className="mt-1 text-sm text-muted">{items.length} items available</p>
             </div>
             <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
               <input
@@ -153,7 +153,7 @@ export default function HomePage() {
           </div>
 
           {error && (
-            <div className="mt-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+            <div className="mt-5 rounded-xl border border-danger-100 bg-danger-50 px-4 py-3 text-sm text-danger-700">
               {error}
               <button type="button" onClick={() => void refresh()} className="ml-2 font-semibold underline">
                 Retry
@@ -162,9 +162,9 @@ export default function HomePage() {
           )}
 
           {loading && items.length === 0 ? (
-            <p className="mt-8 text-center text-sm text-slate-500">Loading menu...</p>
+            <p className="mt-8 text-center text-sm text-muted">Loading menu...</p>
           ) : visibleItems.length === 0 ? (
-            <div className="card mt-5 p-10 text-center text-sm text-slate-500">No items found.</div>
+            <div className="card mt-5 p-10 text-center text-sm text-muted">No items found.</div>
           ) : (
             <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {visibleItems.map((item) => {
@@ -172,7 +172,7 @@ export default function HomePage() {
                 const lowStock = item.stock > 0 && item.stock <= 5;
                 return (
                   <article key={item.id} className="card flex flex-col overflow-hidden">
-                    <div className="h-40 bg-slate-100">
+                    <div className="h-40 bg-cream">
                       <img
                         src={item.imgUrl || "/placeholder.svg"}
                         alt={item.name}
@@ -184,29 +184,29 @@ export default function HomePage() {
                     </div>
                     <div className="flex flex-1 flex-col p-4">
                       <div className="flex items-start justify-between gap-3">
-                        <h3 className="font-semibold text-slate-900">{item.name}</h3>
-                        <span className="font-bold text-indigo-600">{money(item.price)}</span>
+                        <h3 className="font-semibold text-charcoal">{item.name}</h3>
+                        <span className="font-bold text-brick-600">{money(item.price)}</span>
                       </div>
                       <span
                         className={`badge mt-2 self-start ${
                           outOfStock
-                            ? "bg-red-100 text-red-700"
+                            ? "bg-danger-100 text-danger-700"
                             : lowStock
-                              ? "bg-amber-100 text-amber-700"
-                              : "bg-emerald-100 text-emerald-700"
+                              ? "bg-warning-100 text-warning-700"
+                              : "bg-success-100 text-success-700"
                         }`}
                       >
                         {outOfStock ? "OUT OF STOCK" : lowStock ? `LOW STOCK (${item.stock})` : "IN STOCK"}
                       </span>
                       <div className="mt-auto pt-4">
                         <div className="mb-3 flex items-center justify-between">
-                          <span className="text-xs font-medium uppercase tracking-wide text-slate-400">Quantity</span>
-                          <div className="flex items-center rounded-lg border border-slate-200">
+                          <span className="text-xs font-medium uppercase tracking-wide text-muted">Quantity</span>
+                          <div className="flex items-center rounded-lg border border-line">
                             <button
                               type="button"
                               aria-label={`Decrease quantity for ${item.name}`}
                               onClick={() => changeQuantity(item.id, quantityFor(item.id) - 1)}
-                              className="px-3 py-1 text-lg text-slate-600 hover:text-indigo-600"
+                              className="px-3 py-1 text-lg text-muted hover:text-brick-600"
                             >
                               −
                             </button>
@@ -215,7 +215,7 @@ export default function HomePage() {
                               type="button"
                               aria-label={`Increase quantity for ${item.name}`}
                               onClick={() => changeQuantity(item.id, quantityFor(item.id) + 1)}
-                              className="px-3 py-1 text-lg text-slate-600 hover:text-indigo-600"
+                              className="px-3 py-1 text-lg text-muted hover:text-brick-600"
                             >
                               +
                             </button>

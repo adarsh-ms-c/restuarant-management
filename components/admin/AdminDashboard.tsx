@@ -147,12 +147,12 @@ export default function AdminDashboard() {
       />
       <main className="mx-auto max-w-6xl space-y-6 px-4 pb-16 pt-8 sm:px-6">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Admin dashboard</h1>
-          <p className="mt-1 text-sm text-slate-500">Orders, payments, items and stock at a glance.</p>
+          <h1 className="text-2xl font-bold text-charcoal">Admin dashboard</h1>
+          <p className="mt-1 text-sm text-muted">Orders, payments, items and stock at a glance.</p>
         </div>
 
         {error && (
-          <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          <div className="rounded-xl border border-danger-100 bg-danger-50 px-4 py-3 text-sm text-danger-700">
             {error}
             <button type="button" onClick={() => void refresh()} className="ml-2 font-semibold underline">
               Retry
@@ -163,8 +163,8 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
           {cards.map((card) => (
             <div key={card.label} className="card p-4">
-              <p className="text-xs font-medium uppercase tracking-wide text-slate-500">{card.label}</p>
-              <p className="mt-2 text-xl font-bold text-slate-900">{card.value}</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-muted">{card.label}</p>
+              <p className="mt-2 text-xl font-bold text-charcoal">{card.value}</p>
             </div>
           ))}
         </div>
@@ -177,8 +177,8 @@ export default function AdminDashboard() {
               onClick={() => setTab(entry.id)}
               className={`rounded-lg px-4 py-2 text-sm font-semibold ${
                 tab === entry.id
-                  ? "bg-indigo-600 text-white"
-                  : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-100"
+                  ? "bg-brick-600 text-white"
+                  : "border border-line bg-white text-muted hover:bg-paper"
               }`}
             >
               {entry.label}
@@ -187,14 +187,14 @@ export default function AdminDashboard() {
         </div>
 
         {loading && items.length === 0 && orders.length === 0 ? (
-          <div className="card p-10 text-center text-sm text-slate-500">Loading dashboard...</div>
+          <div className="card p-10 text-center text-sm text-muted">Loading dashboard...</div>
         ) : (
           <>
             {tab === "orders" && (
               <section className="card p-4 sm:p-5">
                 <div className="mb-4 flex items-center justify-between gap-3">
-                  <h2 className="text-lg font-semibold text-slate-900">Orders</h2>
-                  <span className="text-xs text-slate-500">{orders.length} total</span>
+                  <h2 className="text-lg font-semibold text-charcoal">Orders</h2>
+                  <span className="text-xs text-muted">{orders.length} total</span>
                 </div>
                 <div className="table-shell">
                   <table className="table">
@@ -212,7 +212,7 @@ export default function AdminDashboard() {
                     <tbody>
                       {orders.map((order) => (
                         <tr key={order.id}>
-                          <td className="font-medium text-slate-900">#{order.id}</td>
+                          <td className="font-medium text-charcoal">#{order.id}</td>
                           <td>{itemName(order.itemId)}</td>
                           <td>{order.quantity}</td>
                           <td className="font-semibold">{money(order.total)}</td>
@@ -242,8 +242,8 @@ export default function AdminDashboard() {
                             <span
                               className={`badge ${
                                 order.stockDeducted
-                                  ? "bg-emerald-100 text-emerald-700"
-                                  : "bg-slate-200 text-slate-600"
+                                  ? "bg-success-100 text-success-700"
+                                  : "bg-line text-muted"
                               }`}
                             >
                               {order.stockDeducted ? "YES" : "NO"}
@@ -252,7 +252,7 @@ export default function AdminDashboard() {
                         </tr>
                       ))}
                       {orders.length === 0 && (
-                        <tr><td colSpan={7} className="py-6 text-center text-slate-500">No orders yet.</td></tr>
+                        <tr><td colSpan={7} className="py-6 text-center text-muted">No orders yet.</td></tr>
                       )}
                     </tbody>
                   </table>
@@ -264,8 +264,8 @@ export default function AdminDashboard() {
               <section className="card p-4 sm:p-5">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h2 className="text-lg font-semibold text-slate-900">Items</h2>
-                    <p className="text-xs text-slate-500">Adding items is available; editing requires an Apps Script update.</p>
+                    <h2 className="text-lg font-semibold text-charcoal">Items</h2>
+                    <p className="text-xs text-muted">Adding items is available; editing requires an Apps Script update.</p>
                   </div>
                   <button type="button" onClick={() => setItemFormOpen(true)} className="btn-primary">
                     + Add item
@@ -296,27 +296,27 @@ export default function AdminDashboard() {
                               }}
                             />
                           </td>
-                          <td className="font-medium text-slate-900">#{item.id}</td>
+                          <td className="font-medium text-charcoal">#{item.id}</td>
                           <td>{item.name}</td>
                           <td>{money(item.price)}</td>
                           <td>
                             <span
                               className={`badge ${
                                 item.stock < 1
-                                  ? "bg-red-100 text-red-700"
+                                  ? "bg-danger-100 text-danger-700"
                                   : item.stock <= LOW_STOCK_THRESHOLD
-                                    ? "bg-amber-100 text-amber-700"
-                                    : "bg-emerald-100 text-emerald-700"
+                                    ? "bg-warning-100 text-warning-700"
+                                    : "bg-success-100 text-success-700"
                               }`}
                             >
                               {item.stock}
                             </span>
                           </td>
-                          <td className="max-w-xs truncate text-xs text-slate-500">{item.imgUrl || "—"}</td>
+                          <td className="max-w-xs truncate text-xs text-muted">{item.imgUrl || "—"}</td>
                         </tr>
                       ))}
                       {items.length === 0 && (
-                        <tr><td colSpan={6} className="py-6 text-center text-slate-500">No items yet.</td></tr>
+                        <tr><td colSpan={6} className="py-6 text-center text-muted">No items yet.</td></tr>
                       )}
                     </tbody>
                   </table>
@@ -326,19 +326,19 @@ export default function AdminDashboard() {
 
             {tab === "low" && (
               <section className="card p-4 sm:p-5">
-                <h2 className="text-lg font-semibold text-slate-900">Low stock</h2>
-                <p className="mt-1 text-sm text-slate-500">Items with {LOW_STOCK_THRESHOLD} or fewer units left.</p>
+                <h2 className="text-lg font-semibold text-charcoal">Low stock</h2>
+                <p className="mt-1 text-sm text-muted">Items with {LOW_STOCK_THRESHOLD} or fewer units left.</p>
                 {lowStock.length === 0 ? (
-                  <p className="mt-6 rounded-xl bg-emerald-50 px-4 py-5 text-sm text-emerald-700">
+                  <p className="mt-6 rounded-xl bg-success-50 px-4 py-5 text-sm text-success-700">
                     All items have healthy stock levels.
                   </p>
                 ) : (
                   <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     {lowStock.map((item) => (
-                      <div key={item.id} className="rounded-xl border border-amber-200 bg-amber-50 p-4">
-                        <p className="font-semibold text-slate-900">{item.name}</p>
-                        <p className="mt-1 text-sm text-slate-600">{money(item.price)}</p>
-                        <p className="mt-2 text-sm font-bold text-amber-700">{item.stock} left</p>
+                      <div key={item.id} className="rounded-xl border border-warning-100 bg-warning-50 p-4">
+                        <p className="font-semibold text-charcoal">{item.name}</p>
+                        <p className="mt-1 text-sm text-muted">{money(item.price)}</p>
+                        <p className="mt-2 text-sm font-bold text-warning-700">{item.stock} left</p>
                       </div>
                     ))}
                   </div>
@@ -351,31 +351,31 @@ export default function AdminDashboard() {
 
       {itemFormOpen && (
         <div
-          className="fixed inset-0 z-40 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-40 flex items-center justify-center bg-overlay p-4 backdrop-blur-sm"
           onMouseDown={(event) => {
             if (event.target === event.currentTarget && !saving) setItemFormOpen(false);
           }}
         >
-          <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
-            <h2 className="text-lg font-semibold text-slate-900">Add item</h2>
-            <p className="mt-1 text-sm text-slate-500">Create a new item in the menu.</p>
+          <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-panel">
+            <h2 className="text-lg font-semibold text-charcoal">Add item</h2>
+            <p className="mt-1 text-sm text-muted">Create a new item in the menu.</p>
             <form className="mt-5 space-y-4" onSubmit={(event) => void saveItem(event)}>
               <div>
-                <label htmlFor="name" className="mb-1 block text-sm font-medium text-slate-700">Name</label>
+                <label htmlFor="name" className="mb-1 block text-sm font-medium text-charcoal">Name</label>
                 <input id="name" name="name" className="input" required placeholder="e.g. Chocolate Coffee" />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label htmlFor="price" className="mb-1 block text-sm font-medium text-slate-700">Price</label>
+                  <label htmlFor="price" className="mb-1 block text-sm font-medium text-charcoal">Price</label>
                   <input id="price" name="price" type="number" min="0" step="0.01" className="input" required />
                 </div>
                 <div>
-                  <label htmlFor="stock" className="mb-1 block text-sm font-medium text-slate-700">Stock</label>
+                  <label htmlFor="stock" className="mb-1 block text-sm font-medium text-charcoal">Stock</label>
                   <input id="stock" name="stock" type="number" min="0" step="1" className="input" required />
                 </div>
               </div>
               <div>
-                <label htmlFor="imgUrl" className="mb-1 block text-sm font-medium text-slate-700">Image URL</label>
+                <label htmlFor="imgUrl" className="mb-1 block text-sm font-medium text-charcoal">Image URL</label>
                 <input id="imgUrl" name="imgUrl" type="url" className="input" placeholder="https://..." />
               </div>
               <div className="flex justify-end gap-2 pt-2">
