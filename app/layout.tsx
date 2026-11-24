@@ -4,9 +4,9 @@ import { DataProvider } from "@/lib/data";
 import { ToastProvider } from "@/components/Toast";
 
 export const metadata: Metadata = {
-  title: "Coffee Time",
-  description: "Order Coffee Time favourites and manage orders, payments and stock.",
-  icons: { icon: "/coffee-logo.svg" },
+  title: "Slo Labs",
+  description: "Order Slo Labs favourites and manage orders, payments and stock.",
+  icons: { icon: "/client-logo.jpg" },
 };
 
 export default function RootLayout({

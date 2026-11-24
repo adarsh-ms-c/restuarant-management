@@ -19,6 +19,12 @@ export type Order = {
   stockDeducted: boolean;
 };
 
+export type PlacedOrder = {
+  order: Order;
+  itemName: string;
+  quantity: number;
+};
+
 export type ApiResponse<T> = {
   success: boolean;
   error?: string;

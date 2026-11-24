@@ -59,9 +59,12 @@ export default function OrderConfirm({ item, quantity, onCancel, onConfirm }: Pr
           </div>
         </div>
 
-        <div className="mt-6 flex justify-end gap-2">
-          <button type="button" onClick={onCancel} className="btn-secondary">
+        <div className="mt-6 flex flex-wrap justify-end gap-2">
+          <button type="button" onClick={onCancel} className="px-3 py-2 text-sm font-medium text-muted hover:text-charcoal">
             Cancel
+          </button>
+          <button type="button" onClick={onCancel} className="btn-secondary">
+            Add more items
           </button>
           <button type="button" onClick={onConfirm} className="btn-primary" autoFocus>
             Place order

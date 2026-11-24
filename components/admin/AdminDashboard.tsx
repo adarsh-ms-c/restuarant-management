@@ -52,6 +52,11 @@ export default function AdminDashboard() {
     [items]
   );
 
+  const sortedOrders = useMemo(
+    () => [...orders].sort((a, b) => b.id - a.id),
+    [orders]
+  );
+
   const itemName = (id: number) =>
     items.find((item) => item.id === id)?.name ?? `Item #${id} (deleted)`;
 
@@ -194,7 +199,7 @@ export default function AdminDashboard() {
               <section className="card p-4 sm:p-5">
                 <div className="mb-4 flex items-center justify-between gap-3">
                   <h2 className="text-lg font-semibold text-charcoal">Orders</h2>
-                  <span className="text-xs text-muted">{orders.length} total</span>
+                  <span className="text-xs text-muted">{sortedOrders.length} total</span>
                 </div>
                 <div className="table-shell">
                   <table className="table">
@@ -210,7 +215,7 @@ export default function AdminDashboard() {
                       </tr>
                     </thead>
                     <tbody>
-                      {orders.map((order) => (
+                      {sortedOrders.map((order) => (
                         <tr key={order.id}>
                           <td className="font-medium text-charcoal">#{order.id}</td>
                           <td>{itemName(order.itemId)}</td>

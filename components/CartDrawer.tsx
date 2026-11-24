@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useData } from "@/lib/data";
 import { useStoredOrderIds } from "@/lib/useStoredOrders";
 import { clearStoredOrders } from "@/lib/local";
 import { money } from "@/lib/format";
+import { TRACK_ORDER_KEY } from "@/lib/config";
 
 type Props = {
   open: boolean;
@@ -12,6 +14,7 @@ type Props = {
 };
 
 export default function CartDrawer({ open, onClose }: Props) {
+  const router = useRouter();
   const { orders, items } = useData();
   const storedIds = useStoredOrderIds();
   const [confirmClear, setConfirmClear] = useState(false);
@@ -25,10 +28,15 @@ export default function CartDrawer({ open, onClose }: Props) {
 
   function track(id: number) {
     onClose();
-    window.dispatchEvent(new CustomEvent("rm-track-order", { detail: id }));
-    window.setTimeout(() => {
-      document.getElementById("track")?.scrollIntoView({ behavior: "smooth" });
-    }, 50);
+    if (document.getElementById("track")) {
+      window.dispatchEvent(new CustomEvent("rm-track-order", { detail: id }));
+      window.setTimeout(() => {
+        document.getElementById("track")?.scrollIntoView({ behavior: "smooth" });
+      }, 50);
+      return;
+    }
+    window.sessionStorage.setItem(TRACK_ORDER_KEY, String(id));
+    router.push("/track#track");
   }
 
   return (
@@ -59,7 +67,16 @@ export default function CartDrawer({ open, onClose }: Props) {
             <div className="mt-16 text-center">
               <p className="text-sm font-medium text-charcoal">Your cart is empty</p>
               <p className="mt-2 text-sm text-muted">Place an order from the menu to see it here.</p>
-              <button type="button" onClick={onClose} className="btn-primary mt-5">Browse menu</button>
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  router.push("/menu");
+                }}
+                className="btn-primary mt-5"
+              >
+                Browse menu
+              </button>
             </div>
           ) : (
             <div className="space-y-3">

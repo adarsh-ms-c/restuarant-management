@@ -16,9 +16,9 @@ export default function AppHeader({ mode, onAdminClick, onCartClick, cartCount =
     <header className="sticky top-0 z-30 border-b border-charcoal-700 bg-charcoal text-white">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-6">
         <Link href="/" className="flex items-center gap-3">
-          <img src="/coffee-logo.svg" alt="Coffee Time logo" className="h-9 w-9" />
+          <img src="/client-logo.jpg" alt="Slo Labs logo" className="h-9 w-9 object-contain" />
           <span>
-            <span className="block text-base font-semibold leading-tight">Coffee Time</span>
+            <span className="block text-base font-semibold leading-tight">Slo Labs</span>
             <span className="block text-xs text-cream">
               {mode === "admin" ? "Admin panel" : "Fresh orders, simple control"}
             </span>
@@ -26,8 +26,8 @@ export default function AppHeader({ mode, onAdminClick, onCartClick, cartCount =
         </Link>
         {mode === "user" ? (
           <nav className="flex items-center gap-1 text-sm sm:gap-2">
-            <a href="#menu" className="rounded-lg px-2 py-2 text-white hover:bg-charcoal-700 hover:text-brick-100 active:bg-brick-600 sm:px-3">Menu</a>
-            <a href="#track" className="rounded-lg px-2 py-2 text-white hover:bg-charcoal-700 hover:text-brick-100 active:bg-brick-600 sm:px-3">Track Order</a>
+            <Link href="/menu#menu" className="rounded-lg px-2 py-2 text-white hover:bg-charcoal-700 hover:text-brick-100 active:bg-brick-600 sm:px-3">Menu</Link>
+            <Link href="/track" className="rounded-lg px-2 py-2 text-white hover:bg-charcoal-700 hover:text-brick-100 active:bg-brick-600 sm:px-3">Track Order</Link>
             <button
               type="button"
               onClick={onCartClick}
